@@ -26,8 +26,15 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.settings), title: Text('Settings')),
         ],
         currentIndex: _selectedPage,
+        onTap: pageChange,
         selectedItemColor: Colors.amber,
       ),
     );
+  }
+
+  void pageChange(int index) {
+    setState(() {
+      _selectedPage = index;
+    });
   }
 }
