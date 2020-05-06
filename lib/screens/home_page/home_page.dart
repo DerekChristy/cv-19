@@ -33,7 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         currentIndex: _selectedPage,
         onTap: _onTabTapped,
-        selectedItemColor: Colors.amber,
+        selectedItemColor: Theme.of(context).primaryColor,
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }
@@ -42,14 +43,5 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _selectedPage = index;
     });
-  }
-}
-
-class testPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text('Page'),
-    );
   }
 }
