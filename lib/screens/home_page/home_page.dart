@@ -1,3 +1,4 @@
+import 'package:cv_19/screens/example/examplePage.dart'; // importing the page to add
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -8,7 +9,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedPage = 0;
   // Add widgets here
-  List<Widget> _children = [];
+  List<Widget> _children = [
+    ExampleWidget(Colors.blueAccent),
+    ExampleWidget(Colors.amberAccent),
+    ExampleWidget(Colors.cyanAccent),
+    ExampleWidget(Colors.deepPurpleAccent)
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,15 +32,24 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.settings), title: Text('Settings')),
         ],
         currentIndex: _selectedPage,
-        onTap: pageChange,
+        onTap: _onTabTapped,
         selectedItemColor: Colors.amber,
       ),
     );
   }
 
-  void pageChange(int index) {
+  void _onTabTapped(int index) {
     setState(() {
       _selectedPage = index;
     });
+  }
+}
+
+class testPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text('Page'),
+    );
   }
 }
