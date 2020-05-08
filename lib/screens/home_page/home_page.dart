@@ -1,4 +1,5 @@
 import 'package:cv_19/screens/example/examplePage.dart'; // importing the page to add
+import 'package:cv_19/screens/news/news_cards.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -11,7 +12,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // Add widgets here
   List<Widget> _children = [
     ExampleWidget(Colors.blueAccent),
-    ExampleWidget(Colors.amberAccent),
+    NewsCards(),
     ExampleWidget(Colors.cyanAccent),
     ExampleWidget(Colors.deepPurpleAccent)
   ];
@@ -24,12 +25,22 @@ class _MyHomePageState extends State<MyHomePage> {
       body: _children[_selectedPage],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.question_answer), title: Text('Q/A')),
-          BottomNavigationBarItem(icon: Icon(Icons.note), title: Text('News')),
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings), title: Text('Settings')),
+            icon: Icon(Icons.question_answer),
+            title: Text('Q/A'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.note),
+            title: Text('News'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            title: Text('Settings'),
+          ),
         ],
         currentIndex: _selectedPage,
         onTap: _onTabTapped,
