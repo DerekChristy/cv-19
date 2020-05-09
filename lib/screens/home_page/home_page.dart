@@ -1,4 +1,5 @@
 import 'package:cv_19/screens/example/examplePage.dart'; // importing the page to add
+import 'package:cv_19/screens/settings_page/settings_page.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -13,7 +14,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ExampleWidget(Colors.blueAccent),
     ExampleWidget(Colors.amberAccent),
     ExampleWidget(Colors.cyanAccent),
-    ExampleWidget(Colors.deepPurpleAccent)
+    MySettingsPage(),
   ];
   @override
   Widget build(BuildContext context) {
