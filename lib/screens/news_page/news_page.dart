@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
-class NewsCards extends StatelessWidget {
+class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white70,
-      
       appBar: AppBar(
         title: Text("News"),
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
       ),
-      
       body: Column(children: <Widget>[
         MainCard(),
         NewsBottomPart(),
@@ -43,12 +41,14 @@ class MainCard extends StatelessWidget {
                         "CASES IN INDIA",
                         style: TextStyle(
                           color: Colors.lightBlueAccent,
-                          fontWeight: FontWeight.bold ,
+                          fontWeight: FontWeight.bold,
                           fontSize: 17.0,
                         ),
                         textAlign: TextAlign.left,
                       ),
-                      SizedBox(height: 8.0,),
+                      SizedBox(
+                        height: 8.0,
+                      ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
