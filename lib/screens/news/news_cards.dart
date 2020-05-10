@@ -10,14 +10,16 @@ class NewsCards extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
       ),
-      body: Column(children: <Widget>[
-        MainCard(),
-        Divider(
-          color: Colors.grey,
-          thickness: 1.0,
-        ),
-        NewsBottomPart(),
-      ]),
+      body: Column(
+        children: <Widget>[
+          MainCard(),
+          Divider(
+            color: Colors.grey,
+            thickness: 1.0,
+          ),
+          NewsBottomPart(),
+        ],
+      ),
     );
   }
 }
@@ -52,7 +54,6 @@ class MainCard extends StatelessWidget {
               Row(
                 //used this to make all the columns spread out in the row
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Column(

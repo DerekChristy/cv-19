@@ -1,5 +1,6 @@
 import 'package:cv_19/screens/example/examplePage.dart'; // importing the page to add
 import 'package:cv_19/screens/news/news_cards.dart';
+import 'package:cv_19/screens/questions/questions.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -12,8 +13,8 @@ class _MyHomePageState extends State<MyHomePage> {
   // Add widgets here
   List<Widget> _children = [
     ExampleWidget(Colors.blueAccent),
+    QuestionAnswers(),
     NewsCards(),
-    ExampleWidget(Colors.cyanAccent),
     ExampleWidget(Colors.deepPurpleAccent)
   ];
   @override
