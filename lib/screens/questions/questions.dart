@@ -44,6 +44,26 @@ Widget build(BuildContext context) {
         _currentStep -= 1;
       });
     },
+
+    controlsBuilder: (BuildContext context,
+      {VoidCallback onStepContinue, VoidCallback onStepCancel} ){
+        return Row(
+          children: <Widget>[
+            Container(
+              color: Colors.blue,
+              child: FlatButton(
+                child: Text("Next",style: TextStyle(color: Colors.white),),
+                onPressed: onStepContinue,
+              ),
+            ),
+            FlatButton(
+              child: Text("Back"),
+              onPressed: onStepCancel,
+            ),
+          ],
+        );
+      },
+
     steps: const <Step>[
       Step(
         title: Text('Step 1'),
