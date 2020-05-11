@@ -13,8 +13,8 @@ class _MyHomePageState extends State<MyHomePage> {
   // Add widgets here
   List<Widget> _children = [
     ExampleWidget(Colors.blueAccent),
-    NewsPage(),
     ExampleWidget(Colors.cyanAccent),
+    NewsPage(),
     MySettingsPage(),
   ];
   @override
