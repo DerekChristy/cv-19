@@ -64,7 +64,8 @@ function verifyToken(req, res, next) {
   if (!payload) {
     return res.status(401).send('Unauthorised request');
   }
-  req._id = payload.payload.subject;
+  // phone or email, check jwt sign
+  req.phone = payload.payload.subject;
   next();
 }
 
