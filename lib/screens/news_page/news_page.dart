@@ -10,10 +10,16 @@ class NewsPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
       ),
-      body: Column(children: <Widget>[
-        MainCard(),
-        NewsBottomPart(),
-      ]),
+      body: Column(
+        children: <Widget>[
+          MainCard(),
+          Divider(
+            color: Colors.grey,
+            thickness: 1.0,
+          ),
+          NewsBottomPart(),
+        ],
+      ),
     );
   }
 }
@@ -21,148 +27,120 @@ class NewsPage extends StatelessWidget {
 class MainCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Column(
-          children: <Widget>[
-            SizedBox(height: 20.0),
-            Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
-              color: Colors.white,
-              margin: EdgeInsets.symmetric(horizontal: 16.0),
-              elevation: 9.0,
-              child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-                  child: Column(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15))),
+        color: Colors.white,
+        margin: EdgeInsets.symmetric(horizontal: 16.0),
+        elevation: 9.0,
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            children: <Widget>[
+              Text(
+                "CASES IN INDIA",
+                style: TextStyle(
+                  color: Colors.lightBlueAccent,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17.0,
+                ),
+                textAlign: TextAlign.left,
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Row(
+                //used this to make all the columns spread out in the row
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Column(
                     children: <Widget>[
                       Text(
-                        "CASES IN INDIA",
+                        "CONFIRMED",
                         style: TextStyle(
-                          color: Colors.lightBlueAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17.0,
-                        ),
-                        textAlign: TextAlign.left,
+                            color: Colors.red, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
-                        height: 8.0,
+                      Text(
+                        "+100",
+                        style: TextStyle(
+                            color: Colors.red, fontWeight: FontWeight.bold),
                       ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "CONFIRMED",
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "+100",
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "31,129",
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                          SizedBox(width: 32.0),
-                          Column(
-                            children: <Widget>[
-                              Text(
-                                "ACTIVE",
-                                style: TextStyle(
-                                    color: Colors.deepPurpleAccent,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "+100",
-                                style: TextStyle(
-                                    color: Colors.deepPurpleAccent,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "31,129",
-                                style: TextStyle(
-                                    color: Colors.deepPurpleAccent,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                          SizedBox(width: 32.0),
-                          Column(
-                            children: <Widget>[
-                              Text(
-                                "RECOVERED",
-                                style: TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "+100",
-                                style: TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "31,129",
-                                style: TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                          SizedBox(width: 32.0),
-                          Column(
-                            children: <Widget>[
-                              Text(
-                                "DEATHS",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "+100",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "31,129",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          )
-                        ],
+                      Text(
+                        "31,129",
+                        style: TextStyle(
+                            color: Colors.red, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        "ACTIVE",
+                        style: TextStyle(
+                            color: Colors.deepPurpleAccent,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "+100",
+                        style: TextStyle(
+                            color: Colors.deepPurpleAccent,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "31,129",
+                        style: TextStyle(
+                            color: Colors.deepPurpleAccent,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        "RECOVERED",
+                        style: TextStyle(
+                            color: Colors.green, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "+100",
+                        style: TextStyle(
+                            color: Colors.green, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "31,129",
+                        style: TextStyle(
+                            color: Colors.green, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        "DEATHS",
+                        style: TextStyle(
+                            color: Colors.grey, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "+100",
+                        style: TextStyle(
+                            color: Colors.grey, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "31,129",
+                        style: TextStyle(
+                            color: Colors.grey, fontWeight: FontWeight.bold),
                       ),
                     ],
-                  )),
-            ),
-            SizedBox(
-              height: 5.0,
-            ),
-            Divider(
-              color: Colors.grey,
-              thickness: 1.0,
-            ),
-            SizedBox(
-              height: 5.0,
-            ),
-          ],
-        )
-      ],
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

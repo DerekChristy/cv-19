@@ -1,5 +1,8 @@
 server/node_modules/
+<<<<<<< HEAD
 
+=======
+>>>>>>> rishi0904-rishi
 # Miscellaneous
 *.class
 *.log
