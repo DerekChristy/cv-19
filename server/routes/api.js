@@ -21,12 +21,19 @@ router.get('/users', (req, res) => {
 router.post('/addUser', (req, res) => {
   const data = req.body;
   const user = new User(data);
-  user.save((err, newUser) => {
+
+  User.findOne({ email: user.email }, (err, user) => {
     if (err) {
-      console.log(err);
-      res.status(401).json(err);
+      user.save((err, newUser) => {
+        if (err) {
+          console.log(err);
+          res.status(401).json(err);
+        } else {
+          res.status(200).json(newUser);
+        }
+      });
     } else {
-      res.status(200).json(newUser);
+      res.status(409).send({ message: 'user already exists' });
     }
   });
 });
