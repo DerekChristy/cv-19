@@ -32,9 +32,8 @@ router.post('/addUser', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  // call after verifying phone number or change to email, update user model
   let data = req.body;
-  User.findOne({ phone: data.phone }, (err, user) => {
+  User.findOne({ email: data.email }, (err, user) => {
     if (err) {
       console.log(err);
       res.status(401).send(err);
@@ -45,7 +44,7 @@ router.post('/login', (req, res) => {
       //   res.status(401).send("invalid password")
       // }
       // check password then
-      let payload = { subject: data.phone };
+      let payload = { subject: data.email };
       let token = jwt.sign({ payload }, KEY);
       res.status(200).send({ token, user });
     }
@@ -65,7 +64,7 @@ function verifyToken(req, res, next) {
     return res.status(401).send('Unauthorised request');
   }
   // phone or email, check jwt sign
-  req.phone = payload.payload.subject;
+  req.email = payload.payload.subject;
   next();
 }
 

@@ -1,3 +1,5 @@
+server/node_modules/
+
 # Miscellaneous
 *.class
 *.log
@@ -13,9 +15,7 @@
 *.iml
 *.ipr
 *.iws
-.idea/11
-
-server/node_modules/
+.idea/
 
 # Flutter/Dart/Pub related
 **/doc/api/
