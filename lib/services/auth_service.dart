@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class AuthService {
   var currentUser;
-  var url = 'http://localhost:3000';
+  var url = 'http://10.0.2.2:3000';
 
   Future<bool> loggedIn() async {
     return false;
@@ -15,19 +15,25 @@ class AuthService {
           'email': email,
           'passwd': passwd,
         }));
+    print(res.body);
     if (res.statusCode == 200) {
       var user = json.decode(res.body);
       print(user);
       // save token to shared pref
     }
+    return false;
   }
 
   Future<String> signup({String email, String passwd}) async {
-    final http.Response res = await http.post(url + '/api/signup',
+    print('signup called with ' + email);
+    final http.Response res = await http.post(url + '/api/addUser',
+        headers: {"Content-type": "application/json"},
         body: jsonEncode(<String, String>{
           'email': email,
           'passwd': passwd,
         }));
+
+    print(res.body);
 
     if (res.statusCode == 409) {
       return '409';

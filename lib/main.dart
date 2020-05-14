@@ -1,11 +1,11 @@
 import 'package:cv_19/screens/home_page/home_page.dart';
-import 'package:cv_19/screens/login_page/login_page.dart';
+import 'package:cv_19/screens/signup_page/signup_page.dart';
 import 'package:cv_19/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 AuthService auth = new AuthService();
 void main() async {
-  Widget _defaultHome = new LoginPage();
+  Widget _defaultHome = new SignupPage();
   bool _result = await auth.loggedIn();
   if (_result) {
     _defaultHome = new MyHomePage();
@@ -26,10 +26,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: _defaultHome, //homeRoute,
-      routes: <String, WidgetBuilder>{
-        '/home': (BuildContext context) => new MyHomePage(),
-        '/login': (BuildContext context) => new LoginPage()
-      },
     );
   }
 }

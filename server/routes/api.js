@@ -20,26 +20,31 @@ router.get('/users', (req, res) => {
 
 router.post('/addUser', (req, res) => {
   const data = req.body;
+  console.log(req.body);
   const user = new User(data);
-
-  User.findOne({ email: user.email }, (err, user) => {
+  console.log('POST addUser');
+  User.findOne({ email: user.email }, (err, oldUser) => {
     if (err) {
-      user.save((err, newUser) => {
-        if (err) {
-          console.log(err);
-          res.status(401).json(err);
-        } else {
-          res.status(200).json(newUser);
-        }
-      });
     } else {
-      res.status(409).send({ message: 'user already exists' });
+      if (oldUser === null) {
+        user.save((err, newUser) => {
+          if (err) {
+            console.log(err);
+            res.status(401).json(err);
+          } else {
+            res.status(200).json(newUser);
+          }
+        });
+      } else {
+        res.status(409).send({ message: 'user already exists' });
+      }
     }
   });
 });
 
 router.post('/login', (req, res) => {
   let data = req.body;
+  console.log(req.body);
   User.findOne({ email: data.email }, (err, user) => {
     if (err) {
       console.log(err);
