@@ -2,8 +2,6 @@ import 'package:cv_19/screens/login_page/login_page.dart';
 import 'package:cv_19/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
-AuthService auth = new AuthService();
-
 class SignupPage extends StatefulWidget {
   @override
   SignupPageState createState() => SignupPageState();
@@ -12,6 +10,7 @@ class SignupPage extends StatefulWidget {
 class SignupPageState extends State<SignupPage> {
   final _email = TextEditingController();
   final _passwd = TextEditingController();
+  final auth = new AuthService();
 
   Widget _buildEmail() {
     return Column(
@@ -110,7 +109,7 @@ class SignupPageState extends State<SignupPage> {
       width: double.infinity,
       child: RaisedButton(
         onPressed: () async {
-          // loading animation
+          // TODO show loading animation
           String status =
               await auth.signup(email: _email.text, passwd: _passwd.text);
           print('status: ' + status);
@@ -119,7 +118,7 @@ class SignupPageState extends State<SignupPage> {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => LoginPage()));
           } else {
-            // show error
+            // TODO: show error
           }
         },
         elevation: 5,
