@@ -8,9 +8,57 @@ class SignupPage extends StatefulWidget {
 }
 
 class SignupPageState extends State<SignupPage> {
+  final _name = TextEditingController();
   final _email = TextEditingController();
+  final _age = TextEditingController();
   final _passwd = TextEditingController();
   final auth = new AuthService();
+
+  Widget _buildName() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Name',
+          style: TextStyle(color: Colors.white, fontSize: 15),
+        ),
+        SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+            color: Color(0xFF6CA8F1),
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6.0,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          height: 60.0,
+          child: TextField(
+            controller: _name,
+            keyboardType: TextInputType.emailAddress,
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.email,
+                color: Colors.white,
+              ),
+              hintText: 'Enter your Name',
+              hintStyle: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 
   Widget _buildEmail() {
     return Column(
@@ -50,6 +98,52 @@ class SignupPageState extends State<SignupPage> {
                 color: Colors.white,
               ),
               hintText: 'Enter your Email',
+              hintStyle: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAge() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Age',
+          style: TextStyle(color: Colors.white, fontSize: 15),
+        ),
+        SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+            color: Color(0xFF6CA8F1),
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6.0,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          height: 60.0,
+          child: TextField(
+            controller: _age,
+            keyboardType: TextInputType.emailAddress,
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.email,
+                color: Colors.white,
+              ),
+              hintText: 'Enter your Age',
               hintStyle: TextStyle(color: Colors.white),
             ),
           ),
@@ -171,7 +265,7 @@ class SignupPageState extends State<SignupPage> {
             physics: AlwaysScrollableScrollPhysics(),
             padding: EdgeInsets.symmetric(
               horizontal: 30.0,
-              vertical: 120.0,
+              vertical: 50.0,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -184,11 +278,24 @@ class SignupPageState extends State<SignupPage> {
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
+
+                SizedBox(
+                  height: 20.0,
+                ),
+
+                _buildName(), // this builds name widget
+
                 SizedBox(
                   height: 20.0,
                 ),
 
                 _buildEmail(), // email and feildtext widget
+
+                SizedBox(
+                  height: 20.0,
+                ),
+
+                _buildAge(), // this builds the age widget
 
                 SizedBox(
                   height: 20.0,
