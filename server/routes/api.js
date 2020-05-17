@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const Response = require('../models/response');
 const jwt = require('jsonwebtoken');
 const KEY = 'cv-19-india';
 
@@ -22,7 +23,6 @@ router.post('/addUser', (req, res) => {
   const data = req.body;
   console.log(req.body);
   const user = new User(data);
-  console.log('POST addUser');
   User.findOne({ email: user.email }, (err, oldUser) => {
     if (err) {
     } else {
@@ -32,6 +32,7 @@ router.post('/addUser', (req, res) => {
             console.log(err);
             res.status(401).json(err);
           } else {
+            console.log('new user added', newUser);
             res.status(200).json(newUser);
           }
         });
@@ -50,15 +51,19 @@ router.post('/login', (req, res) => {
       console.log(err);
       res.status(401).send(err);
     } else {
-      // if(user.passwd === data.passwd){
-      //   res.status(200).send({user, token});
-      // } else {
-      //   res.status(401).send("invalid password")
-      // }
-      // check password then
-      let payload = { subject: data.email };
-      let token = jwt.sign({ payload }, KEY);
-      res.status(200).send({ token, user });
+      if (user !== null) {
+        if (user.passwd === data.passwd) {
+          console.log('login successful');
+          let payload = { subject: data.email };
+          let token = jwt.sign({ payload }, KEY);
+          res.status(200).send({ token, user });
+        } else {
+          console.log('invalid passwd');
+          res.status(401).send('invalid password');
+        }
+      } else {
+        res.status(401).send('user not found');
+      }
     }
   });
 });

@@ -3,10 +3,12 @@ import 'package:cv_19/screens/signup_page/signup_page.dart';
 import 'package:cv_19/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
-AuthService auth = new AuthService();
 void main() async {
+  AuthService auth = new AuthService();
+  WidgetsFlutterBinding.ensureInitialized();
   Widget _defaultHome = new SignupPage();
-  bool _result = await auth.loggedIn();
+  await auth.initPrefs();
+  bool _result = auth.loggedIn();
   if (_result) {
     _defaultHome = new MyHomePage();
   }

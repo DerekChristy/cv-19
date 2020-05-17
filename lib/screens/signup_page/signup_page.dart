@@ -2,8 +2,6 @@ import 'package:cv_19/screens/login_page/login_page.dart';
 import 'package:cv_19/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
-AuthService auth = new AuthService();
-
 class SignupPage extends StatefulWidget {
   @override
   SignupPageState createState() => SignupPageState();
@@ -12,6 +10,7 @@ class SignupPage extends StatefulWidget {
 class SignupPageState extends State<SignupPage> {
   final _email = TextEditingController();
   final _passwd = TextEditingController();
+  final auth = new AuthService();
 
   Widget _buildEmail() {
     return Column(
@@ -110,7 +109,7 @@ class SignupPageState extends State<SignupPage> {
       width: double.infinity,
       child: RaisedButton(
         onPressed: () async {
-          // loading animation
+          // TODO show loading animation
           String status =
               await auth.signup(email: _email.text, passwd: _passwd.text);
           print('status: ' + status);
@@ -119,7 +118,7 @@ class SignupPageState extends State<SignupPage> {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => LoginPage()));
           } else {
-            // show error
+            // TODO: show error
           }
         },
         elevation: 5,
@@ -161,58 +160,59 @@ class SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(
-        title: Text("COVID-19 Tracker App"),
-      ),
-      body: Container(
-        color: Colors.blueAccent,
-        height: double.infinity,
-        child: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
-          padding: EdgeInsets.symmetric(
-            horizontal: 30.0,
-            vertical: 120.0,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                "Create Account",
-                style: TextStyle(
-                    fontSize: 30.0,
-                    fontFamily: 'OpenSans',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("COVID-19 Tracker App"),
+        ),
+        body: Container(
+          color: Colors.blueAccent,
+          height: double.infinity,
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            padding: EdgeInsets.symmetric(
+              horizontal: 30.0,
+              vertical: 120.0,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Create Account",
+                  style: TextStyle(
+                      fontSize: 30.0,
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
 
-              _buildEmail(), // email and feildtext widget
+                _buildEmail(), // email and feildtext widget
 
-              SizedBox(
-                height: 20.0,
-              ),
+                SizedBox(
+                  height: 20.0,
+                ),
 
-              _buildPassword(), // password and password textfeild widget
+                _buildPassword(), // password and password textfeild widget
 
-              SizedBox(
-                height: 40.0,
-              ),
+                SizedBox(
+                  height: 40.0,
+                ),
 
-              _buildSignUP(), // signup button widget
+                _buildSignUP(), // signup button widget
 
-              SizedBox(
-                height: 20,
-              ),
+                SizedBox(
+                  height: 20,
+                ),
 
-              _buildLogin(), // login button widget
-            ],
+                _buildLogin(), // login button widget
+              ],
+            ),
           ),
         ),
       ),
-    ));
+    );
   }
 }
 

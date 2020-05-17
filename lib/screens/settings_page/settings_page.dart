@@ -1,3 +1,5 @@
+import 'package:cv_19/screens/login_page/login_page.dart';
+import 'package:cv_19/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:share/share.dart';
@@ -6,6 +8,7 @@ import 'package:share/share.dart';
 //code for the basic settings ui
 
 class MySettingsPage extends StatelessWidget {
+  final auth = new AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,6 +132,18 @@ class MySettingsPage extends StatelessWidget {
                     onTap: () {
                       Share.share(
                           "Flutter is cool!"); //We can share the text written within the quotes
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.exit_to_app,
+                      color: Colors.red,
+                    ),
+                    title: Text('Logout'),
+                    onTap: () {
+                      auth.logout();
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => LoginPage()));
                     },
                   ),
                 ],

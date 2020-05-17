@@ -1,9 +1,8 @@
+import 'package:cv_19/screens/home_page/home_page.dart';
 import 'package:cv_19/screens/signup_page/signup_page.dart';
 import 'package:cv_19/services/auth_service.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_signin_button/flutter_signin_button.dart';
-
-AuthService auth = new AuthService();
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,7 +11,11 @@ class LoginPage extends StatefulWidget {
 
 class LoginPageState extends State<LoginPage> {
   final _email = TextEditingController();
-  final _pass = TextEditingController();
+  final _passwd = TextEditingController();
+  final auth = AuthService();
+  LoginPageState() {
+    auth.initPrefs();
+  }
 
   Widget _buildEmail() {
     return Column(
@@ -84,7 +87,7 @@ class LoginPageState extends State<LoginPage> {
           ),
           height: 60.0,
           child: TextField(
-            controller: _pass,
+            controller: _passwd,
             obscureText: true,
             style: TextStyle(
               color: Colors.white,
@@ -125,9 +128,16 @@ class LoginPageState extends State<LoginPage> {
       width: double.infinity,
       child: RaisedButton(
         onPressed: () async {
+          // TODO: show loading spinner
           bool loggedin =
-              await auth.login(email: _email.text, passwd: _pass.text);
-          print('Logged in' + loggedin.toString());
+              await auth.login(email: _email.text, passwd: _passwd.text);
+          print('Logged in: ' + loggedin.toString());
+          if (loggedin) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => MyHomePage()));
+          } else {
+            // TODO: show error on screen
+          }
         },
         elevation: 5,
         padding: EdgeInsets.all(15),
@@ -186,7 +196,7 @@ class LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "Sign In",
+                  "Login",
                   style: TextStyle(
                       fontSize: 30.0,
                       fontFamily: 'OpenSans',
@@ -222,7 +232,6 @@ class LoginPageState extends State<LoginPage> {
                 ),
 
                 _buildSignUpBtn(), // signup button widget
-                
               ],
             ),
           ),
