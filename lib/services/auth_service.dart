@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:cv_19/models/User.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,6 +12,14 @@ class AuthService {
     prefs = await SharedPreferences.getInstance();
     print('prefrence init done');
     return true;
+  }
+
+  Future<User> user() async {
+    String token = prefs.getString('token');
+    final http.Response res = await http.get(url + '/api/user',
+        headers: {HttpHeaders.authorizationHeader: token});
+    User user = new User.fromJson(json.decode(res.body));
+    return user;
   }
 
   bool loggedIn() {

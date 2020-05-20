@@ -28,6 +28,6 @@ app.get('/', (req, res) => {
   res.send('Hello from server');
 });
 
-app.listen(PORT, '192.168.43.59', () => {
+app.listen(PORT, () => {
   console.log('Server running at port', PORT);
 });

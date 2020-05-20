@@ -8,13 +8,40 @@ const KEY = 'cv-19-india';
 router.get('/', (req, res) => {
   res.send('Hi from cv-19 API');
 });
-// TODO: complete user schema
+
+// ! Remove this as anyone can get ALL the reg users info, only for dev purpose
 router.get('/users', (req, res) => {
   User.find((err, users) => {
     if (err) {
       console.log(err);
     } else {
       res.status(200).json(users);
+    }
+  });
+});
+
+router.get('/user', verifyToken, (req, res) => {
+  User.findOne({ email: req.email }, (err, user) => {
+    if (err) {
+      console.log(err);
+      res.status(401).send(err);
+    } else {
+      res.status(200).json(user);
+    }
+  });
+});
+
+router.post('/resposes', (req, res) => {
+  let resp = { date: Date.now(), respnse: req.body };
+  let resObj = { email: req.email, response: resp };
+  const response = new Response(resObj);
+  response.save((err, newRes) => {
+    if (err) {
+      console.log(err);
+      res.status(401).send(err);
+    } else {
+      console.log('saved response from', newRes.email);
+      res.sendStatus(200);
     }
   });
 });
