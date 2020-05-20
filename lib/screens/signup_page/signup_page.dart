@@ -39,7 +39,7 @@ class SignupPageState extends State<SignupPage> {
           height: 60.0,
           child: TextField(
             controller: _name,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.text,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -48,7 +48,7 @@ class SignupPageState extends State<SignupPage> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.email,
+                Icons.perm_identity,
                 color: Colors.white,
               ),
               hintText: 'Enter your Name',
@@ -131,7 +131,7 @@ class SignupPageState extends State<SignupPage> {
           height: 60.0,
           child: TextField(
             controller: _age,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.number,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -140,7 +140,7 @@ class SignupPageState extends State<SignupPage> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.email,
+                Icons.create,
                 color: Colors.white,
               ),
               hintText: 'Enter your Age',
@@ -204,8 +204,11 @@ class SignupPageState extends State<SignupPage> {
       child: RaisedButton(
         onPressed: () async {
           // TODO show loading animation
-          String status =
-              await auth.signup(email: _email.text, passwd: _passwd.text);
+          String status = await auth.signup(
+              email: _email.text,
+              passwd: _passwd.text,
+              name: _name.text,
+              age: _age.text);
           print('status: ' + status);
           if (status == '200') {
             // goto login page
@@ -288,14 +291,14 @@ class SignupPageState extends State<SignupPage> {
                 SizedBox(
                   height: 20.0,
                 ),
-
-                _buildEmail(), // email and feildtext widget
+                // this builds the age widget
+                _buildAge(),
 
                 SizedBox(
                   height: 20.0,
                 ),
 
-                _buildAge(), // this builds the age widget
+                _buildEmail(), // email and feildtext widget
 
                 SizedBox(
                   height: 20.0,
@@ -322,58 +325,3 @@ class SignupPageState extends State<SignupPage> {
     );
   }
 }
-
-/*
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Register'),
-      ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              controller: _email,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: _passwd,
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'Password'),
-            ),
-            MaterialButton(
-              onPressed: () async {
-                // loading animation
-                String status =
-                    await auth.signup(email: _email.text, passwd: _passwd.text);
-                print('status: ' + status);
-                if (status == '200') {
-                  // goto login page
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => LoginPage()));
-                } else {
-                  // show error
-                }
-              },
-              child: Text('Sign Up'),
-            ),
-            Text('or'),
-            MaterialButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                );
-              },
-              child: Text('Login'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-*/

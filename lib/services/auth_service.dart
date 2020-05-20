@@ -51,13 +51,16 @@ class AuthService {
     }
   }
 
-  Future<String> signup({String email, String passwd}) async {
+  Future<String> signup(
+      {String email, String passwd, String name, String age}) async {
     print('signup called with ' + email);
     final http.Response res = await http.post(url + '/api/addUser',
         headers: {"Content-type": "application/json"},
         body: jsonEncode(<String, String>{
           'email': email,
           'passwd': passwd,
+          'name': name,
+          'age': age
         }));
 
     print(res.body);
