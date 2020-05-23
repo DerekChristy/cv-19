@@ -6,8 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   SharedPreferences prefs;
-  var url = 'http://192.168.43.59:3000';
-
+  var url = 'https://cv-19-app.herokuapp.com';
+  // var url = 'http://10.0.2.2';
   Future<bool> initPrefs() async {
     prefs = await SharedPreferences.getInstance();
     print('prefrence init done');
@@ -16,10 +16,16 @@ class AuthService {
 
   Future<User> user() async {
     String token = prefs.getString('token');
+    print('AuthHeaderToken $token');
     final http.Response res = await http.get(url + '/api/user',
         headers: {HttpHeaders.authorizationHeader: token});
-    User user = new User.fromJson(json.decode(res.body));
-    return user;
+    print(res.body);
+    if (res.statusCode == 200) {
+      User user = new User.fromJson(json.decode(res.body));
+      return user;
+    } else {
+      return null;
+    }
   }
 
   bool loggedIn() {

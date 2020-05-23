@@ -1,3 +1,4 @@
+import 'package:cv_19/models/User.dart';
 import 'package:cv_19/screens/login_page/login_page.dart';
 import 'package:cv_19/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,24 @@ import 'package:share/share.dart';
 
 //code for the basic settings ui
 
-class MySettingsPage extends StatelessWidget {
+class MySettingsPage extends StatefulWidget {
+  @override
+  _MySettingsPageState createState() => _MySettingsPageState();
+}
+
+class _MySettingsPageState extends State<MySettingsPage> {
   final auth = new AuthService();
+  User user;
+
+  _MySettingsPageState() {
+    initService();
+  }
+
+  void initService() async {
+    await auth.initPrefs();
+    this.user = await auth.user();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +48,20 @@ class MySettingsPage extends StatelessWidget {
             Card(
               child: Column(
                 children: <Widget>[
+                  ListTile(
+                    leading: Icon(
+                      Icons.person,
+                      color: Colors.blue,
+                    ),
+                    title: Text('Profile'),
+                    trailing: Icon(Icons.keyboard_arrow_right),
+                    onTap: () async {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileRoute(user)));
+                    },
+                  ),
                   ListTile(
                     leading: Icon(
                       Icons.assignment,
@@ -156,8 +187,39 @@ class MySettingsPage extends StatelessWidget {
   }
 }
 
-//About Page
+class ProfileRoute extends StatelessWidget {
+  final User user;
+  ProfileRoute(this.user);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile'),
+      ),
+      body: Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              title: Text('Name'),
+              subtitle: Text(user.name),
+            ),
+            ListTile(
+              title: Text('Email'),
+              subtitle: Text(user.email),
+            ),
+            ListTile(
+              title: Text('Age'),
+              subtitle: Text(user.age),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
 
+//About Page
 class AboutRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
